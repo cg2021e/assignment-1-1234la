@@ -21,4 +21,4 @@ From the object or image that I had from the previous task, in this task we were
 7. The rendering result on the right side of the Canvas is animated vertically, bouncing back between the top and the bottom walls of the Canvas, with a speed of 0.0xxx units, where xxx is the last three digits of the NRP.  
 8. Do not forget to commit and push the changes.  
 
-The results of the task can be seen at <a href = "https://cg2021e.github.io/assignment-1-1234la/" target="__blank"> here </a>
+The results of the task can be seen at <a href = "https://cg2021e.github.io/assignment-1-1234la/" target="_blank"> here </a>
