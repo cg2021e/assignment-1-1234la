@@ -4,7 +4,7 @@
 **Name :** Lathifa Itqonina Mardiyati  
 **NRP :** 05111940000176  
   
-In this task we are asked to look for objects with the provisions that have been given, namely object whose name starts with E, J, or O (in English). After that we must to take photos of the thing from four different perspectives: top right, top left, top rear, top front of image of the object like what i had done below.  Finally, i choose jar of "air freshener" to be an object in this assignment.
+In this task we are asked to look for objects with the provisions that have been given, namely object whose name starts with E, J, or O (in English). After that we must to take photos of the thing from four different perspectives: top right, top left, top rear, top front of image of the object like what I had done below.  Finally, I choosed jar of "air freshener" to be an object in this assignment.
 
 | Top Front | Top Right | Top Left | Top Rear |
 | :---: | :---: | :---: | :---:|
