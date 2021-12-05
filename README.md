@@ -21,7 +21,7 @@ From the object or image that I had from the previous task, in this task we were
 7. The rendering result on the right side of the Canvas is animated vertically, bouncing back between the top and the bottom walls of the Canvas, with a speed of 0.0xxx units, where xxx is the last three digits of the NRP.  
 8. Do not forget to commit and push the changes.  
 
-The results of the task can be seen at <a href = "https://cg2021e.github.io/assignment-1-1234la/" target="_blank"> here </a>
+The results of the task can be seen at <a href = "https://cg2021e.github.io/assignment-1-1234la/assignment-2/index-assignment-2.html" target="_blank"> here </a>
 
 # Assignment 3
 1. Create a 3D definition of the object being photographed in your very first assignment.
@@ -34,3 +34,5 @@ The results of the task can be seen at <a href = "https://cg2021e.github.io/assi
 8. Add a metal specular effect for the object on the right. 
 9. Set the cube so that it can be moved upward with the W key-button and downward with the S key-button. 
 10. Set the camera to move leftward and rightward linearly (not orbitally) using the A and D key-buttons.
+
+The results of the task can be seen at <a href = "https://cg2021e.github.io/assignment-1-1234la/assignment-3/index-assignment-3.html" target="_blank"> here </a>
