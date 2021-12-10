@@ -5,7 +5,7 @@ function main() {
 
 	// Define vertices data consisting of position and color properties
 	//command for challenge #2
-    //var y_cube = [...object_light];
+    var y_cube = [...object_light];
 	var vertices = [];
 
 	//command assignment 2
@@ -61,6 +61,7 @@ function main() {
         uniform vec3 uLightPosition;
         uniform mat3 uNormalModel;
         uniform vec3 uViewerPosition;
+		uniform float uLightOn;
         void main() {
             vec3 ambient = uLightConstant * uAmbientIntensity;
             vec3 lightDirection = uLightPosition - vPosition;
@@ -68,7 +69,7 @@ function main() {
             vec3 normalizedNormal = normalize(uNormalModel * vNormal);
             float cosTheta = dot(normalizedNormal, normalizedLight);
             vec3 diffuse = vec3(0., 0., 0.);
-            if (cosTheta > 0.) {
+            if (cosTheta > 0. && uLightOn == 1. ) {
                 float diffuseIntensity = cosTheta;
                 diffuse = uLightConstant * diffuseIntensity;
             }
@@ -77,7 +78,7 @@ function main() {
             vec3 normalizedViewer = normalize(uViewerPosition - vPosition);
             float cosPhi = dot(normalizedReflector, normalizedViewer);
             vec3 specular = vec3(0., 0., 0.);
-            if (cosPhi > 0.) {
+            if (cosPhi > 0. && uLightOn == 1.) {
                 float specularIntensity = pow(cosPhi, vShininessConstant); 
                 specular = uLightConstant * specularIntensity;
             }
@@ -209,7 +210,7 @@ function main() {
 	);
 	gl.uniform3fv(uViewerPosition, camera);
 
-	// command for challenge #2
+	// command assignment 2
 	// function onKeyPressed(event) {
 	// 	if (event.keyCode == 87) {
 	// 		for (let i = 0; i < y_cube.length; i += 10) {
@@ -329,6 +330,22 @@ function main() {
 	document.addEventListener("mousedown", onMouseDown, false);
 	document.addEventListener("mouseup", onMouseUp, false);
 	document.addEventListener("mousemove", onMouseMove, false);
+
+	//Challenge #4
+	var uLightOnValue = 1.;
+	var uLightOn = gl.getUniformLocation(shaderProgram, "uLightOn");
+
+	function onKeyPressed(event) {
+		if(event.keyCode == 32) {
+			if(uLightOnValue == 0.) {
+				uLightOnValue = 1.;
+			} else if(uLightOnValue == 1.) {
+				uLightOnValue = 0.;
+			}
+			gl.uniform1f(uLightOn, uLightOnValue);
+		}
+	}
+	document.addEventListener("keydown", onKeyPressed);
 
 	function render() {
 		// command assigment 2
