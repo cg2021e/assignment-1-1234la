@@ -8,10 +8,11 @@ function main() {
     //var y_cube = [...object_light];
 	var vertices = [];
 
-	//command for challenge #2
+	//command assignment 2
 	// var indices = [...indices_object_right, ...indices_object_left, ...indices_object_light];
-	//for challenge #2
-	var indices = [...indices_object_right, ...indices_object_left];
+
+	//for challenge #3
+	var indices = [...indices_object_right, ...indices_object_left,...indices_object_light, ...indices_object_plane];
 
 	// Create a linked-list for storing the vertices data
 	var vertexBuffer = gl.createBuffer();
@@ -40,7 +41,7 @@ function main() {
         uniform mat4 uView;
         uniform mat4 uProjection;
         void main() {
-            gl_Position = uProjection * uView * uModel * (vec4(aPosition * 2. / 3., 1.5));
+            gl_Position = uProjection * uView * uModel * (vec4(aPosition * 2. / 3., 2.5));
             vColor = aColor;
             vNormal = aNormal;
             vPosition = (uModel * (vec4(aPosition * 2. / 3., 1.5))).xyz;
@@ -246,17 +247,19 @@ function main() {
 	// document.addEventListener("keydown", onKeyPressed, false);
 
 	function render() {
-		// command for challenge #2
+		// command assigment 2
         //vertices = [...object_right, ...object_left, ...y_cube];
-		// for challenge #2
-		vertices = [...object_right, ...object_left];
-		// gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
-		// gl.bufferData(
-		// 	gl.ARRAY_BUFFER,
-		// 	new Float32Array(vertices),
-		// 	gl.STATIC_DRAW
-		// );
-		// gl.uniform3fv(uLightPosition, lightPosition);
+
+		// for challenge #3
+		vertices = [...object_right, ...object_left, ...object_light, ...object_plane];
+
+		gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+		gl.bufferData(
+			gl.ARRAY_BUFFER,
+			new Float32Array(vertices),
+			gl.STATIC_DRAW
+		);
+		gl.uniform3fv(uLightPosition, lightPosition);
 
 		// Init the model matrix
 		var model = glMatrix.mat4.create();
