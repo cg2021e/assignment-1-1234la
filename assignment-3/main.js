@@ -364,6 +364,7 @@ function main() {
 
 		// Init the model matrix
 		var model = glMatrix.mat4.create();
+		glMatrix.mat4.multiply(model, model, rotation);
 		gl.uniformMatrix4fv(uModel, false, model);
 		// Set the model matrix for normal vector
 		var normalModel = glMatrix.mat3.create();
