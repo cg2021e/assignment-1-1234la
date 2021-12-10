@@ -4,7 +4,8 @@ function main() {
 	var gl = canvas.getContext("webgl"); // The brush and the paints
 
 	// Define vertices data consisting of position and color properties
-    var y_cube = [...object_light];
+	//command for challenge #2
+    //var y_cube = [...object_light];
 	var vertices = [];
 
 	var indices = [...indices_object_right, ...indices_object_left, ...indices_object_light];
@@ -203,53 +204,54 @@ function main() {
 		"uViewerPosition"
 	);
 	gl.uniform3fv(uViewerPosition, camera);
+	// command for challenge #2
+	// function onKeyPressed(event) {
+	// 	if (event.keyCode == 87) {
+	// 		for (let i = 0; i < y_cube.length; i += 10) {
+	// 			y_cube[i + 1] += 0.04;
+	// 			lightPosition[1] += 0.04 * 1 / 20;
+	// 			console.log("Test");
+	// 		}
+	// 	} else if (event.keyCode == 83) {
+	// 		for (let i = 0; i < y_cube.length; i += 10) {
+	// 			y_cube[i + 1] -= 0.04;
+	// 			lightPosition[1] -= 0.04 * 1 / 20;
+	// 		}
+	// 	} else if (event.keyCode == 65) {
+	// 		camera[0] -= 0.04;
+	// 		camNow[0] -= 0.04;
+	// 		glMatrix.mat4.lookAt(
+	// 			view,
+	// 			camera, // camera position
+	// 			camNow, // the point where camera looks at
+	// 			[0, 1, 0] // up vector of the camera
+	// 		);
+	// 		gl.uniformMatrix4fv(uView, false, view);
+	// 	} else if (event.keyCode == 68) {
+	// 		camera[0] += 0.04;
+	// 		camNow[0] += 0.04;
+	// 		glMatrix.mat4.lookAt(
+	// 			view,
+	// 			camera, // camera position
+	// 			camNow, // the point where camera looks at
+	// 			[0, 1, 0] // up vector of the camera
+	// 		);
+	// 		gl.uniformMatrix4fv(uView, false, view);
+	// 	}
+	// }
 
-	function onKeyPressed(event) {
-		if (event.keyCode == 87) {
-			for (let i = 0; i < y_cube.length; i += 10) {
-				y_cube[i + 1] += 0.04;
-				lightPosition[1] += 0.04 * 1 / 20;
-				console.log("Test");
-			}
-		} else if (event.keyCode == 83) {
-			for (let i = 0; i < y_cube.length; i += 10) {
-				y_cube[i + 1] -= 0.04;
-				lightPosition[1] -= 0.04 * 1 / 20;
-			}
-		} else if (event.keyCode == 65) {
-			camera[0] -= 0.04;
-			camNow[0] -= 0.04;
-			glMatrix.mat4.lookAt(
-				view,
-				camera, // camera position
-				camNow, // the point where camera looks at
-				[0, 1, 0] // up vector of the camera
-			);
-			gl.uniformMatrix4fv(uView, false, view);
-		} else if (event.keyCode == 68) {
-			camera[0] += 0.04;
-			camNow[0] += 0.04;
-			glMatrix.mat4.lookAt(
-				view,
-				camera, // camera position
-				camNow, // the point where camera looks at
-				[0, 1, 0] // up vector of the camera
-			);
-			gl.uniformMatrix4fv(uView, false, view);
-		}
-	}
-
-	document.addEventListener("keydown", onKeyPressed, false);
+	// document.addEventListener("keydown", onKeyPressed, false);
 
 	function render() {
         vertices = [...object_right, ...object_left, ...y_cube];
-		gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
-		gl.bufferData(
-			gl.ARRAY_BUFFER,
-			new Float32Array(vertices),
-			gl.STATIC_DRAW
-		);
-		gl.uniform3fv(uLightPosition, lightPosition);
+		// command for challenge #2
+		// gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+		// gl.bufferData(
+		// 	gl.ARRAY_BUFFER,
+		// 	new Float32Array(vertices),
+		// 	gl.STATIC_DRAW
+		// );
+		// gl.uniform3fv(uLightPosition, lightPosition);
 		// Init the model matrix
 		var model = glMatrix.mat4.create();
 		gl.uniformMatrix4fv(uModel, false, model);
