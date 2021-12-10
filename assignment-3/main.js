@@ -44,7 +44,7 @@ function main() {
             gl_Position = uProjection * uView * uModel * (vec4(aPosition * 2. / 3., 2.5));
             vColor = aColor;
             vNormal = aNormal;
-            vPosition = (uModel * (vec4(aPosition * 2. / 3., 1.5))).xyz;
+            vPosition = (uModel * (vec4(aPosition * 2. / 3., 2.5))).xyz;
             vShininessConstant = aShininessConstant;
         }
     `;
@@ -248,7 +248,7 @@ function main() {
 
 	// document.addEventListener("keydown", onKeyPressed, false);
 
-	// challenge #4 : rotate function
+	// challenge #6 : rotate function
 	var lastPointOnTrackBall, currentPointOnTrackBall;
 	var lastQuat = glMatrix.quat.create();
 	function computeCurrentQuat() {
@@ -278,7 +278,8 @@ function main() {
 
 	var dragging, rotation = glMatrix.mat4.create();
 
-	function onMouseDown(event) { //saat mouse di drag ke bawah
+	 //saat mouse di drag ke bawah
+	function onMouseDown(event) {
 		var x = event.clientX;
 		var y = event.clientY;
 		var rect = event.target.getBoundingClientRect();
@@ -335,7 +336,15 @@ function main() {
 	var uLightOnValue = 1.;
 	var uLightOn = gl.getUniformLocation(shaderProgram, "uLightOn");
 
+	var cameraTurn = 90;
+    var cameraDistance = 3;
+	// Set the view matrix in the vertex shader
+	var view = glMatrix.mat4.create();
+
+	
+	// Challenge #5
 	function onKeyPressed(event) {
+		//space button
 		if(event.keyCode == 32) {
 			if(uLightOnValue == 0.) {
 				uLightOnValue = 1.;
@@ -343,6 +352,103 @@ function main() {
 				uLightOnValue = 0.;
 			}
 			gl.uniform1f(uLightOn, uLightOnValue);
+		}
+		// S button
+		else if(event.keyCode == 83) { 
+			for(let i=0;i<y_cube.length;i+=10) {
+				y_cube[i+2] += 0.0176; //mengganti arah lampu
+	
+			}
+			lightPosition[2] += 0.0176 ;
+		}
+		
+		// W button
+		else if(event.keyCode == 87) { 
+			for(let i=0;i<y_cube.length;i+=10) {
+				y_cube[i+2] -= 0.0176;
+	
+			}
+			lightPosition[2] -= 0.0176;
+		}
+		// A button
+		else if(event.keyCode == 65) { // ini tombol A
+			for(let i=0;i<y_cube.length;i+=10) {
+				y_cube[i] -= 0.0176; //mengganti arah lampu
+	
+			}
+			lightPosition[1] -= 0.0176 ;
+		}
+		
+		// D button
+		else if(event.keyCode == 68) { //ini tombol D
+			for(let i=0;i<y_cube.length;i+=10) {
+				y_cube[i] += 0.0176; //mengganti arah lampu
+	
+			}
+			lightPosition[1] += 0.0176;
+		}
+
+		// camera, // camera position
+		// camNow, // the point where camera looks at
+		// Arrow up
+		else if(event.keyCode == 38) { 
+			// camera[2] -= 0.0176;
+				// camupdate[2] -= 0.0176; //mengganti linear 
+				cameraDistance -= 0.5;
+				let cos = Math.cos(cameraTurn*Math.PI/180.0);
+				let sin = Math.sin(cameraTurn*Math.PI/180.0);
+				camera = [cameraDistance*cos, 0, cameraDistance*sin];
+				glMatrix.mat4.lookAt(
+					view,
+					camera,      // camera position
+					camNow,      // the point where camera looks at
+					[0, 1, 0]       // up vector of the camera
+				);
+				gl.uniformMatrix4fv(uView, false, view);
+		}
+		//arrow down
+		else if(event.keyCode == 40) { 
+			// camera[2] -= 0.0176;
+				// camupdate[2] -= 0.0176; //mengganti linear 
+				cameraDistance += 0.5;
+				let cos = Math.cos(cameraTurn*Math.PI/180.0);
+				let sin = Math.sin(cameraTurn*Math.PI/180.0);
+				camera = [cameraDistance*cos, 0, cameraDistance*sin];
+				glMatrix.mat4.lookAt(
+					view,
+					camera,      // camera position
+					camNow,      // the point where camera looks at
+					[0, 1, 0]       // up vector of the camera
+				);
+				gl.uniformMatrix4fv(uView, false, view);
+		}
+		//left
+		else if(event.keyCode == 37) { 
+			cameraTurn += 0.5;
+			let cos = Math.cos(cameraTurn*Math.PI/180.0);
+			let sin = Math.sin(cameraTurn*Math.PI/180.0);
+			camera = [cameraDistance*cos, 0, cameraDistance*sin];
+			glMatrix.mat4.lookAt(
+					view,
+					camera,      // camera position
+					camNow,      // the point where camera looks at
+					[0, 1, 0]       // up vector of the camera
+			);
+			gl.uniformMatrix4fv(uView, false, view);
+		}
+		//right button
+		else if(event.keyCode == 39) { 
+			cameraTurn -= 0.5;
+			let cos = Math.cos(cameraTurn*Math.PI/180.0);
+			let sin = Math.sin(cameraTurn*Math.PI/180.0);
+			camera = [cameraDistance*cos, 0, cameraDistance*sin];
+			glMatrix.mat4.lookAt(
+					view,
+					camera,      // camera position
+					camNow,      // the point where camera looks at
+					[0, 1, 0]       // up vector of the camera
+			);
+			gl.uniformMatrix4fv(uView, false, view);
 		}
 	}
 	document.addEventListener("keydown", onKeyPressed);
@@ -352,7 +458,7 @@ function main() {
         //vertices = [...object_right, ...object_left, ...y_cube];
 
 		// for challenge #3
-		vertices = [...object_right, ...object_left, ...object_light, ...object_plane];
+		vertices = [...object_right, ...object_left, ...y_cube, ...object_plane];
 
 		gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
 		gl.bufferData(
@@ -361,6 +467,7 @@ function main() {
 			gl.STATIC_DRAW
 		);
 		gl.uniform3fv(uLightPosition, lightPosition);
+
 
 		// Init the model matrix
 		var model = glMatrix.mat4.create();
