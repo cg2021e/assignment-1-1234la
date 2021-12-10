@@ -8,7 +8,10 @@ function main() {
     //var y_cube = [...object_light];
 	var vertices = [];
 
-	var indices = [...indices_object_right, ...indices_object_left, ...indices_object_light];
+	//command for challenge #2
+	// var indices = [...indices_object_right, ...indices_object_left, ...indices_object_light];
+	//for challenge #2
+	var indices = [...indices_object_right, ...indices_object_left];
 
 	// Create a linked-list for storing the vertices data
 	var vertexBuffer = gl.createBuffer();
@@ -243,8 +246,10 @@ function main() {
 	// document.addEventListener("keydown", onKeyPressed, false);
 
 	function render() {
-        vertices = [...object_right, ...object_left, ...y_cube];
 		// command for challenge #2
+        //vertices = [...object_right, ...object_left, ...y_cube];
+		// for challenge #2
+		vertices = [...object_right, ...object_left];
 		// gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
 		// gl.bufferData(
 		// 	gl.ARRAY_BUFFER,
@@ -252,6 +257,7 @@ function main() {
 		// 	gl.STATIC_DRAW
 		// );
 		// gl.uniform3fv(uLightPosition, lightPosition);
+
 		// Init the model matrix
 		var model = glMatrix.mat4.create();
 		gl.uniformMatrix4fv(uModel, false, model);
